@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "tazkrtak"
+  },
+  "targets": {
+    "tazkrtak": {
+      "hosting": {
+        "api": [
+          "tazkrtak-api"
+        ]
+      }
+    }
+  }
+}
