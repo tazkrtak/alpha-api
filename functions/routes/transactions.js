@@ -2,6 +2,12 @@ const moment = require("moment");
 const router = require("express").Router();
 const firestore = require("firebase-admin").firestore();
 
+router.get("/total", (req, res) => {
+  fetchTransactions()
+    .then(snap => res.json({ total: snap.size }))
+    .catch(e => console.log(e));
+});
+
 router.get("/income", (req, res) => {
   fetchTransactions()
     .then(snap =>
