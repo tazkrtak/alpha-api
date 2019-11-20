@@ -173,4 +173,4 @@ function getIntervalSpec(interval: Interval): IntervalSpec {
   }
 }
 
-module.exports = router;
+export = router;

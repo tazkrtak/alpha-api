@@ -1,14 +1,36 @@
+/* Firebase */
+
 import admin = require("firebase-admin");
 import functions = require("firebase-functions");
-import express = require("express");
-import bodyParser = require("body-parser");
+const serviceAccountKey = require("./serviceAccountKey.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(require("./serviceAccountKey.json")),
+  credential: admin.credential.cert(serviceAccountKey),
   databaseURL: "https://tazkrtak.firebaseio.com"
 });
 
+
+/* Express */
+
+import express = require("express");
+import bodyParser = require("body-parser");
+
+import rootRouter  = require("./routes/root");
+import busesRouter = require("./routes/buses");
+import staffRouter = require("./routes/staff");
+import usersRouter = require("./routes/users");
+import transRouter = require("./routes/transactions");
+
 const app = express();
+
+app.use(bodyParser.json());
+
+app.use("/", rootRouter);
+app.use("/buses", busesRouter);
+app.use("/staff", staffRouter);
+app.use("/users", usersRouter);
+app.use("/transactions", transRouter);
+
 
 const cors = {
   origin: ["https://tazkrtak-admin.web.app", "http://127.0.0.1:4000"]
@@ -26,22 +48,5 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
-app.use("/buses", require("./routes/buses"));
-app.use("/staff", require("./routes/staff"));
-app.use("/users", require("./routes/users"));
-app.use("/transactions", require("./routes/transactions"));
-
-app.get("/status", (req, res) => {
-  res.json({ status: "alive" });
-});
-
-app.get("/about", (req, res) => {
-  res.json({
-    name: "Tazkrtak",
-    description: "Tazkrtak REST API",
-    apiVersion: "v1"
-  });
-});
 
 exports.api = functions.https.onRequest(app);
