@@ -71,6 +71,7 @@ serviceAccountKey.json
 docs/
 
 ## Compiled JavaScript files
+dist/
 **/*.js
 **/*.js.map
 
