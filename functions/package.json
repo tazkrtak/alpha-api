@@ -1,15 +1,18 @@
 {
   "name": "tazkrtak-api",
   "description": "Tazkrtak REST API",
+  "main": "dist/index.js",
   "apidoc": {
     "version": "0.0.0",
     "url": "https://tazkrtak-api.web.app"
   },
   "scripts": {
-    "lint": "eslint .",
-    "doc": "apidoc -e node_modules/ -o ../docs",
-    "serve": "firebase serve --only functions",
-    "shell": "firebase functions:shell",
+    "doc": "apidoc -i dist/ -o ../docs",
+    "lint": "tslint --project tsconfig.json",
+    "build": "npm run lint && tsc && npm run doc",
+    "watch": "npm run lint && tsc -w && npm run doc",
+    "serve": "npm run watch && firebase serve --only functions",
+    "shell": "npm run watch && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
@@ -26,9 +29,9 @@
   },
   "devDependencies": {
     "apidoc": "^0.18.0",
-    "eslint": "^5.12.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "firebase-functions-test": "^0.1.6"
+    "firebase-functions-test": "^0.1.6",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
   },
   "private": true
 }

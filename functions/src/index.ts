@@ -1,14 +1,13 @@
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-const key = require("./serviceAccountKey.json");
+import admin = require("firebase-admin");
+import functions = require("firebase-functions");
+import express = require("express");
+import bodyParser = require("body-parser");
 
 admin.initializeApp({
-  credential: admin.credential.cert(key),
+  credential: admin.credential.cert(require("./serviceAccountKey.json")),
   databaseURL: "https://tazkrtak.firebaseio.com"
 });
 
-const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
 
 const cors = {
@@ -16,9 +15,9 @@ const cors = {
 };
 
 app.use((req, res, next) => {
-  let origin = req.headers.origin;
-  if (cors.origin.includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin);
+  const origin = req.headers.origin || ' ';
+  if (cors.origin.includes(origin[0])) {
+    res.header("Access-Control-Allow-Origin", origin[0]);
   }
   res.header(
     "Access-Control-Allow-Headers",
@@ -28,7 +27,6 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-
 app.use("/buses", require("./routes/buses"));
 app.use("/staff", require("./routes/staff"));
 app.use("/users", require("./routes/users"));

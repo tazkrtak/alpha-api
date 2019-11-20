@@ -69,3 +69,10 @@ serviceAccountKey.json
 
 # Hosting directory (auto generated with apiDoc)
 docs/
+
+## Compiled JavaScript files
+**/*.js
+**/*.js.map
+
+# Typescript v1 declaration files
+typings/

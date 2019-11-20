@@ -1,5 +1,8 @@
-const router = require("express").Router();
-const firestore = require("firebase-admin").firestore();
+import express = require("express");
+import admin = require("firebase-admin");
+
+const router = express.Router();
+const db = admin.firestore();
 
 /**
  * @api {get} /staff/total Get staff total count
@@ -13,8 +16,7 @@ const firestore = require("firebase-admin").firestore();
  *     }
  */
 router.get("/total", (req, res) => {
-  firestore
-    .collection("staff")
+  db.collection("staff")
     .get()
     .then(snap => res.json({ total: snap.size }))
     .catch(e => console.log(e));
