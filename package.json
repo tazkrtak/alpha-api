@@ -10,9 +10,9 @@
     "doc": "apidoc -i dist/ -o docs/",
     "lint": "tslint --project tsconfig.json",
     "build": "npm run lint && tsc && npm run doc",
-    "watch": "tsc -w",
-    "serve": "npm run build && firebase serve",
-    "shell": "npm run build && firebase functions:shell"
+    "config": "firebase functions:config:get > .runtimeconfig.json",
+    "serve": "npm run build && npm run config && firebase serve",
+    "shell": "npm run build && npm run config && firebase functions:shell"
   },
   "engines": {
     "node": "8"

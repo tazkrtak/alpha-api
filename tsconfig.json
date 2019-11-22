@@ -6,10 +6,9 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "dist",
-    "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
     "target": "es2017"
   },
-  "include": ["src", "src/serviceAccountKey.json"],
+  "include": ["src"],
 }

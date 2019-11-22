@@ -1,13 +1,19 @@
 /* Firebase */
 
-import admin = require("firebase-admin");
+import admin     = require("firebase-admin");
 import functions = require("firebase-functions");
-const serviceAccountKey = require("./serviceAccountKey.json");
+
+const config      = functions.config();
+const credential  = admin.credential.cert({
+  clientEmail: config.admin.client_email,
+  privateKey: config.admin.private_key
+});
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccountKey),
-  databaseURL: "https://tazkrtak.firebaseio.com"
+  ...JSON.parse(process.env.FIREBASE_CONFIG!),
+  credential
 });
+
 
 /* Express */
 
