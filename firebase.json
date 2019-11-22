@@ -1,9 +1,6 @@
 {
   "functions": {
-    "source": ".",
-    "predeploy": [
-      "npm run build"
-    ]
+    "source": "."
   },
   "hosting": {
     "target": "api", 

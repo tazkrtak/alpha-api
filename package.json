@@ -7,12 +7,12 @@
     "url": "https://tazkrtak-api.web.app"
   },
   "scripts": {
-    "doc": "apidoc -i dist/ -o docs/",
-    "lint": "tslint --project tsconfig.json",
-    "build": "npm run lint && tsc && npm run doc",
+    "doc"   : "apidoc -i dist/ -o docs/",
+    "build" : "tslint --project tsconfig.json && tsc",
     "config": "firebase functions:config:get > .runtimeconfig.json",
-    "serve": "npm run build && npm run config && firebase serve",
-    "shell": "npm run build && npm run config && firebase functions:shell"
+    "serve" : "npm run build && npm run doc && npm run config && firebase serve",
+    "shell" : "npm run build && npm run doc && npm run config && firebase functions:shell",
+    "deploy": "npm run build && npm run doc && firebase deploy"
   },
   "engines": {
     "node": "8"

@@ -5,8 +5,8 @@
 curl https://tazkrtak-api.web.app/
 
 ## Serve
-firebase serve
+npm run serve
 
 ## Deploy
-firebase deploy [-m 'Deployment Message']
+npm run deploy
 ```
